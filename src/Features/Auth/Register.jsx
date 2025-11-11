@@ -17,7 +17,7 @@ const Register = () => {
       .then((res) => {
         console.log(res.user);
         toast.success("successfully Signed in with Google");
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => toast.error(error.message));
   };
@@ -40,7 +40,7 @@ const Register = () => {
     createUser(email, password)
       .then(() => {
         toast.success("successfully Signup"), e.target.reset();
-        navigate("/home");
+        navigate("/");
       })
       .catch((err) => toast.error(err.message));
   };

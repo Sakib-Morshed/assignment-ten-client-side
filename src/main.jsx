@@ -27,6 +27,7 @@ const router = createBrowserRouter([
       {
         path: "browsePublic",
         element: <BrowsePublic />,
+        loader: () => fetch("http://localhost:3000/allHabits"),
       },
       {
         path: "register",
@@ -37,17 +38,20 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        element: <PrivateRoute />,
-        children: [
-          {
-            path: "addHabit",
-            element: <AddHabit />,
-          },
-          {
-            path: "myHabits",
-            element: <MyHabits />,
-          },
-        ],
+        path: "addHabit",
+        element: (
+          <PrivateRoute>
+            <AddHabit />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myHabit",
+        element: (
+          <PrivateRoute>
+            <MyHabits />
+          </PrivateRoute>
+        ),
       },
     ],
   },

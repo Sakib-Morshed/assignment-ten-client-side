@@ -8,8 +8,9 @@ import { useContext } from "react";
 const Login = () => {
   const [passError, setPassError] = useState(false);
   const [showPass, setShowPass] = useState(false);
-  const { signInUser, signInWithGoogle,user,setUser } = useContext(AuthContext);
-  
+  const { signInUser, signInWithGoogle, user, setUser } =
+    useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleGoogleSignIn = (e) => {
@@ -18,7 +19,7 @@ const Login = () => {
       .then((res) => {
         console.log(res.user);
         toast.success("successfully Signed in with Google");
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => toast.error(error.message));
   };
@@ -41,7 +42,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         toast.success("successfully SigIn"), e.target.reset();
-        navigate("/home");
+        navigate("/");
       })
       .catch((err) => toast.error(err.message));
   };
