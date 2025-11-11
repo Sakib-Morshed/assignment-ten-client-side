@@ -8,8 +8,31 @@ import {
   FaSmileBeam,
   FaStar,
 } from "react-icons/fa";
+import { motion, useReducedMotion } from "framer-motion";
+
+//framer motion
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12, // delay between card animations
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.995 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
 
 const Home = () => {
+  const shouldReduce = useReducedMotion();
   return (
     <>
       <div className=" max-w-7xl mx-auto">
@@ -38,8 +61,19 @@ const Home = () => {
             Consistent habits shape who we become. Small daily actions lead to
             lasting focus, happiness, and personal success.
           </p>
-          <div className="grid grid-cols-4 gap-5">
-            <div className="card bg-base-100 shadow-green-400 hover:shadow-amber-500  w-70 shadow-sm">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-6"
+            variants={shouldReduce ? {} : containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            <motion.div
+              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+              variants={shouldReduce ? {} : itemVariants}
+              whileHover={shouldReduce ? {} : { scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="card-body">
                 <h2 className="card-title">
                   Better Focus
@@ -56,8 +90,13 @@ const Home = () => {
                   <div className="badge badge-outline  ">Productive</div>
                 </div>
               </div>
-            </div>
-            <div className="card bg-base-100 shadow-green-400 hover:shadow-amber-500  w-70 shadow-sm">
+            </motion.div>
+            <motion.div
+              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+              variants={shouldReduce ? {} : itemVariants}
+              whileHover={shouldReduce ? {} : { scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="card-body">
                 <h2 className="card-title">
                   Strong Mindset
@@ -75,8 +114,13 @@ const Home = () => {
                   <div className="badge badge-outline ">Mono Task</div>
                 </div>
               </div>
-            </div>
-            <div className="card bg-base-100 shadow-green-400 hover:shadow-amber-500  w-70 shadow-sm">
+            </motion.div>
+            <motion.div
+              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+              variants={shouldReduce ? {} : itemVariants}
+              whileHover={shouldReduce ? {} : { scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="card-body">
                 <h2 className="card-title">
                   Reduced Stress
@@ -94,8 +138,13 @@ const Home = () => {
                   <div className="badge badge-outline">Prioritize</div>
                 </div>
               </div>
-            </div>
-            <div className="card bg-base-100 shadow-green-400 hover:shadow-amber-500  w-70 shadow-sm">
+            </motion.div>
+            <motion.div
+              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+              variants={shouldReduce ? {} : itemVariants}
+              whileHover={shouldReduce ? {} : { scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="card-body">
                 <h2 className="card-title">
                   Continuous Growth
@@ -114,8 +163,8 @@ const Home = () => {
                   <div className="badge badge-outline">Delegate</div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* build habit section end */}
