@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const AddHabit = () => {
   const addHabit = (e) => {
@@ -10,6 +11,7 @@ const AddHabit = () => {
     const reminderTime = e.target.reminderTime.value;
     const userEmail = e.target.userEmail.value;
     const UserName = e.target.userName.value;
+    const image = e.target.image.value;
 
     const formData = {
       habitTitle,
@@ -18,6 +20,7 @@ const AddHabit = () => {
       reminderTime,
       userEmail,
       UserName,
+      image,
     };
 
     fetch("http://localhost:3000/allHabits", {
@@ -28,8 +31,9 @@ const AddHabit = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        toast.success("Successfully added habit !");
+        e.target.reset();
       })
       .catch((err) => {
         console.log(err.message);

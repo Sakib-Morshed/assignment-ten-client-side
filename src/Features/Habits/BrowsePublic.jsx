@@ -37,7 +37,10 @@ const BrowsePublic = () => {
                 <div className="badge badge-outline">{habit.category}</div>
                 <div className="badge badge-outline">{habit.reminderTime}</div>
               </div>
-              <Link to="" className="btn w-full my-5">
+              <Link
+                to={`/habitDetails/${habit._id}`}
+                className="btn w-full my-5"
+              >
                 See Details
               </Link>
             </div>
