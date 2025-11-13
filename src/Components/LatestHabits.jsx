@@ -1,28 +1,13 @@
-import React, { useContext } from "react";
-import { Link, useLoaderData } from "react-router";
-import { AuthContext } from "../../Context/AuthContext";
+import React, { use } from "react";
+import { Link } from "react-router";
 
-const BrowsePublic = () => {
-  const data = useLoaderData();
-  const { loading, setLoading } = useContext(AuthContext);
-  console.log(data);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-spinner text-primary w-30"></span>
-        <span className="loading loading-spinner text-primary w-30"></span>
-      </div>
-    );
-  }
-
+const LatestHabits = ({ latestHabitsPromise }) => {
+  const habits = use(latestHabitsPromise);
+  console.log(habits);
   return (
     <>
-      <h2 className="text-2xl font-bold text-center pt-10">
-        Explore All Public Habits{" "}
-      </h2>
       <div className=" max-w-7xl mx-auto my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {data.map((habit) => (
+        {habits.map((habit) => (
           <div key={habit._id} className="card bg-base-100 w-90 shadow-sm p-5">
             <figure>
               <img className="w-full h-40" src={habit.image} alt="Shoes" />
@@ -51,4 +36,4 @@ const BrowsePublic = () => {
   );
 };
 
-export default BrowsePublic;
+export default LatestHabits;

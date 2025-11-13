@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[url('/footerBg.svg')] bg-cover bg-center h-64 w-full">
-      <footer className="footer sm:footer-horizontal  text-neutral-content p-10 px-96">
+    <div className="bg-[url('/footerBg.svg')] bg-cover bg-center w-full">
+      <footer className="footer md:footer-horizontal  text-neutral-content p-10 md:px-40 lg:px-96">
         <nav className="mt-5">
           <div className="flex gap-1">
             <img src="/logo.jpg" className="w-10 h-8" alt="" />

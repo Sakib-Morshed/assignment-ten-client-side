@@ -9,6 +9,12 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { motion, useReducedMotion } from "framer-motion";
+import LatestHabits from "../../Components/LatestHabits";
+import { Typewriter } from "react-simple-typewriter";
+
+const latestHabitsPromise = fetch("http://localhost:3000/latestHabits").then(
+  (res) => res.json()
+);
 
 //framer motion
 
@@ -36,6 +42,27 @@ const Home = () => {
   return (
     <>
       <div className=" max-w-7xl mx-auto">
+        <div className="text-center my-10">
+          <h1 className="text-4xl font-bold">
+            Build Better Habits With{" "}
+            <span className="text-primary">
+              <Typewriter
+                words={[
+                  "Consistency",
+                  "Discipline",
+                  "Productivity",
+                  "Daily Streaks",
+                ]}
+                loop={5}
+                cursor
+                cursorStyle="|"
+                typeSpeed={80}
+                deleteSpeed={60}
+                delaySpeed={1500}
+              />
+            </span>
+          </h1>
+        </div>
         {/* Slider */}
         <div className=" rounded-xl overflow-hidden shadow-lg my-10 ">
           <Carousel />
@@ -49,6 +76,10 @@ const Home = () => {
           <h2 className="text-xl font-bold text-center py-10">
             Explore Recent Public Habits
           </h2>
+
+          <LatestHabits
+            latestHabitsPromise={latestHabitsPromise}
+          ></LatestHabits>
         </div>
 
         {/* card end */}

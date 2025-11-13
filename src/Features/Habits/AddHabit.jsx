@@ -44,7 +44,7 @@ const AddHabit = () => {
   };
   return (
     <>
-      <div className="max-w-7xl mx-auto min-h-screen">
+      <div className="md:max-w-7xl mx-auto min-h-screen">
         <h2 className="text-2xl font-bold text-center pt-10">Add New Habit</h2>
 
         <form

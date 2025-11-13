@@ -21,13 +21,13 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center py-4 navbar bg-base-100 shadow-sm shadow-green-300 text-green px-10">
+    <div className="flex justify-between items-center py-4 navbar bg-base-100 shadow-sm shadow-green-300 text-green md:px-3 lg:px-10">
       <div className="flex gap-2 items-center">
         <img src="/logo.jpg" className="w-10 h-8" alt="" />
-        <h2 className="text-xl font-bold">Habit Tracker</h2>
+        <h2 className="md:text-xl font-bold">Habit Tracker</h2>
       </div>
       <div>
-        <ul className="flex gap-4 items-center justify-center text-md">
+        <ul className="flex gap-2 md:gap-4 items-center justify-center md:text-md">
           <NavLink
             className=" hover:text-[#2f9e9c] hover:border-b border-b-purple-600"
             to="/"
@@ -53,12 +53,6 @@ const Header = () => {
                 to="/myHabits"
               >
                 My Habits
-              </NavLink>
-              <NavLink
-                className="hover:text-[#2f9e9c] hover:border-b border-b-purple-600"
-                to={`updateHabit/${user.uid}`}
-              >
-                Update-habit
               </NavLink>
             </div>
           )}
@@ -95,12 +89,13 @@ const Header = () => {
             <li className="text-center text-sm text-gray-500">{user.email}</li>
             <div className="divider my-1"></div>
             <li>
-              <button
+              <Link
+                to="/"
                 onClick={handleSignOut}
                 className="btn text-red-500 font-semibold"
               >
                 Sign out
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

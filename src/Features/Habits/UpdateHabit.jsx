@@ -1,23 +1,66 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../Context/AuthContext";
-import { useLoaderData } from "react-router";
+import React from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const UpdateHabit = () => {
-  const { user } = useContext(AuthContext);
   const data = useLoaderData();
+  const navigate = useNavigate();
   console.log(data);
+
+  const updateHabit = (e) => {
+    e.preventDefault();
+
+    const habitTitle = e.target.habitTitle.value;
+    const description = e.target.description.value;
+    const category = e.target.category.value;
+    const reminderTime = e.target.reminderTime.value;
+    const userEmail = e.target.userEmail.value;
+    const userName = e.target.userName.value;
+    const image = e.target.image.value;
+
+    const formData = {
+      habitTitle,
+      description,
+      category,
+      reminderTime,
+      userEmail,
+      userName,
+      image,
+    };
+
+    fetch(`http://localhost:3000/allHabits/${data._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Successfully Updated habit !");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <>
       <div className="max-w-7xl mx-auto min-h-screen">
         <h2 className="text-2xl font-bold text-center pt-10">Add New Habit</h2>
 
-        <form className="card card-body bg-base-100 w-[500px] p-8 mx-auto my-10  max-w-md shrink-0 shadow-2xl">
+        <form
+          onSubmit={updateHabit}
+          className="card card-body bg-base-100 w-[500px] p-8 mx-auto my-10  max-w-md shrink-0 shadow-2xl"
+        >
           <fieldset className="fieldset">
             <label className="label">Habit Title</label>
             <input
               type="text"
               className="input"
               required
+              defaultValue={data.habitTitle}
               name="habitTitle"
               placeholder="Enter habit title"
             />
@@ -26,6 +69,7 @@ const UpdateHabit = () => {
               type="text"
               className="input"
               required
+              defaultValue={data.description}
               name="description"
               placeholder="Enter habit description"
             ></textarea>
@@ -33,11 +77,10 @@ const UpdateHabit = () => {
             <select
               name="category"
               required
+              defaultValue={data.category}
               className="select select-bordered "
             >
-              <option disabled selected>
-                Select a category
-              </option>
+              <option disabled>Select a category</option>
               <option>Morning</option>
               <option>Work</option>
               <option>Fitness</option>
@@ -45,12 +88,19 @@ const UpdateHabit = () => {
               <option>Study</option>
             </select>
             <label className="label">Reminder Time</label>
-            <input type="time" className="input" required name="reminderTime" />
+            <input
+              type="time"
+              defaultValue={data.reminderTime}
+              className="input"
+              required
+              name="reminderTime"
+            />
             <label className="label">Image Url</label>
             <input
               type="text"
               className="input"
               required
+              defaultValue={data.image}
               name="image"
               placeholder="image url"
             />
@@ -59,7 +109,7 @@ const UpdateHabit = () => {
               type="text"
               className="input"
               required
-              defaultValue={user.displayName}
+              defaultValue={data.userName}
               name="userName"
               placeholder="Enter your Name"
             />
@@ -68,7 +118,7 @@ const UpdateHabit = () => {
               type="email"
               className="input"
               required
-              defaultValue={user.email}
+              defaultValue={data.userEmail}
               name="userEmail"
               placeholder="Email"
             />
@@ -79,7 +129,7 @@ const UpdateHabit = () => {
               required
               placeholder="Password"
             />
-            <button className="btn btn-neutral mt-4">Add Habit</button>
+            <button className="btn btn-neutral mt-4">Update Habit</button>
           </fieldset>
         </form>
       </div>

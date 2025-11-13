@@ -37,7 +37,7 @@ export default function Carousel() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="/slider1.jpg" alt="" />
+          <img src="/slider7.webp" alt="" />
         </SwiperSlide>
         <SwiperSlide>
           <img src="/slider2.jpg" alt="" />
