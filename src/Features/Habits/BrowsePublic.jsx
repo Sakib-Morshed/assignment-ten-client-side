@@ -5,7 +5,21 @@ import { AuthContext } from "../../Context/AuthContext";
 const BrowsePublic = () => {
   const data = useLoaderData();
   const { loading, setLoading } = useContext(AuthContext);
+  const [searchText, setSearchText] = React.useState("");
+  const [selectedCategory, setSelectedCategory] = React.useState("All");
+
   console.log(data);
+
+  const filteredHabits = data.filter((habit) => {
+    const matchesSearch = habit.habitTitle
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === "All" || habit.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
 
   if (loading) {
     return (
@@ -21,8 +35,31 @@ const BrowsePublic = () => {
       <h2 className="text-2xl font-bold text-center pt-10">
         Explore All Public Habits{" "}
       </h2>
+
+      <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row gap-5 justify-between">
+        <input
+          type="text"
+          placeholder="Search habits..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="input input-bordered w-full md:w-1/2"
+        />
+
+        <select
+          className="select select-bordered w-full md:w-1/3"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="All">All Categories</option>
+          <option value="Morning">Morning</option>
+          <option value="Work">Work</option>
+          <option value="Fitness">Fitness</option>
+          <option value="Evening">Evening</option>
+          <option value="Study">Study</option>
+        </select>
+      </div>
       <div className=" max-w-7xl mx-auto my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {data.map((habit) => (
+        {filteredHabits.map((habit) => (
           <div key={habit._id} className="card bg-base-100 w-90 shadow-sm p-5">
             <figure>
               <img className="w-full h-40" src={habit.image} alt="Shoes" />
